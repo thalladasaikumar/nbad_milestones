@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>New Connection</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+	</head>
+	<body>
+    <header>
+      <%- include('partials/header2.ejs')%>
+    </header>
+    <header>
+      <%- include('partials/navigation2.ejs')%>
+    </header>
+		<section>
+      <div class="newconnect_form">
+        <form>
+          <table class="newconnect">
+              <tr>
+                <td><label class="label"> topic </label></td>
+                <td><input class="textbox" type="text" placeholder="Topic"></td>
+              </tr>
+              <tr>
+                <td><label class="label"> name </label></td>
+                <td><input class="textbox" type="text" placeholder="Name"></td>
+              </tr>
+              <tr>
+                <td><label class="label"> details </label></td>
+                <td><textarea name="name" rows="10" cols="100" placeholder="Details"></textarea></td>
+              </tr>
+              <tr>
+                <td><label class="label"> where </label></td>
+                <td><input class="textbox" type="text" placeholder="Place"></td>
+              </tr>
+              <tr>
+                <td><label class="label"> when </label></td>
+                <td><input class="textbox" type="date"></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input  type="submit" value="Submit">
+                </td>
+              </tr>
+          </table>
+        </form>
+  	</div>
+	</section>
+  <footer>
+    <%- include('partials/footer.ejs') %>
+  </footer>
+	</body>
+</html>

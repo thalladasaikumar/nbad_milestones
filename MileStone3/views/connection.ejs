@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Connections Page</title>
+	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<header>
+		<%- include('partials/header.ejs')%>
+	</header>
+	<header>
+		<%- include('partials/navigation.ejs')%>
+	</header>
+
+	<section id="connectiondetail">
+		<h3><%= connection.getConnection_name %></h3>
+			<p>
+				<img alt="" src="<%= connection.getImage %>" style="margin-left: 10px; margin-right: 10px; float: left; width: 127px; height: 180px;">
+			</p>
+			<p class="authorpara"><%= connection.getDetails %></p>
+			<p class="authorpara">
+				Event date: <span class="eventdate"> <%= connection.getDateAndTime %></span>
+			</p>
+			<p class="authorpara">
+				Hosted By: <span class="eventdate"> <%= connection.getHostedBy %></span>
+			</p>
+			 <h2>Are you going?</h2> &nbsp; &nbsp;
+			 <form class="" action="<% if(session!=undefined){ %>
+				 				savedConnections?id=<%=connection.getConnectionId%>&action=save
+			 			<% } else { %>
+							login
+						<% } %>" method="<% if(session!=undefined){ %>post<% } else{ %>get<% } %>">
+					<button class="responsebutton" name="response" value="yes">Yes</button>
+					<button class="responsebutton" name="response" value="no"> No </button>
+					<button class="responsebutton" name="response" value="maybe">Maybe?</button>
+					<input type="hidden" name="viewConnection" value="<%= connection.getConnectionId %>">
+			 </form>
+
+	</section>
+	<footer>
+		<%- include('partials/footer.ejs')%>
+	</footer>
+</body>
+</html>

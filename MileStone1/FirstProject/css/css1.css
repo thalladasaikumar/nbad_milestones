@@ -1,0 +1,47 @@
+header{
+	top: 0px;
+}
+footer{
+	bottom: 0px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: right;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  height: 38px;
+  padding-top: 26px;
+  padding-right: 36px;
+  padding-bottom: 14px;
+  padding-left: 36px;
+}
+
+li a:hover:not(.active) {
+  background-color: #4CAF50;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+li#logo{
+	float: left;
+	padding-top: 3px;
+    padding-left: 40px;
+}
+
+nav.sub-nav{
+	padding-top: 1px;
+}

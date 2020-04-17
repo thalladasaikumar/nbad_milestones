@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Connections Page</title>
+	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+</head>
+<body>
+	<header>
+		<%- include('partials/header2.ejs')%>
+	</header>
+	<header>
+		<%- include('partials/navigation2.ejs')%>
+	</header>
+
+	<section id="connectionsSection">
+		<table>
+		  <tr>
+		    <th>Connections</th>
+		    <th>Category</th>
+		    <th>Going?</th>
+		    <th></th>
+		  </tr>
+			<% savedConnections.forEach(function(item){ %>
+				<tr>
+					<td><%= item.connection_name %></td>
+					<td><%= item.connection_category %></td>
+					<td>Yes</td>
+			    <td><button class="responsebutton" onclick="window.location.href = 'connections'">Update</button> &nbsp; &nbsp; &nbsp;<button class="responsebutton" onclick="window.location.href = 'savedConnections'">Delete</button></td>
+				</tr>
+			<% }) %>
+		</table>
+	</section>
+
+	<footer>
+		<%- include('partials/footer.ejs')%>
+	</footer>
+</body>
+</html>

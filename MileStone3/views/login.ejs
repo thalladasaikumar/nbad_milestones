@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+    <title>Login</title>
+  </head>
+  <body>
+    <header>
+      <%- include('partials/header.ejs')%>
+    </header>
+    <header>
+      <%- include('partials/navigation.ejs')%>
+    </header>
+
+    <section id="content">
+			<h1>Welcome Online Book Depot</h1>
+			<p>
+				Please enter your username and password to login
+			</p>
+      <form action="/savedConnections" method="post">
+        <table>
+          <tr>
+            <td><label class="label"> Username </label></td>
+            <td><input type="text" name="username" value=""></td>
+          </tr>
+          <tr>
+            <td><label class="label"> Password </label></td>
+            <td><input type="password" name="password" value=""></td>
+          </tr>
+          <tr>
+            <td></td><td><input type="submit" value="Login"></td>
+          </tr>
+        </table>
+      </form>
+		</section>
+    <footer>
+  		<%- include('partials/footer.ejs') %>
+  	</footer>
+  </body>
+</html>

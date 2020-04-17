@@ -1,0 +1,76 @@
+use nbad;
+db.dropDatabase();
+db.createCollection('connections');
+db.createCollection('userprofiles');
+db.createCollection('users');
+db.users.insertOne(
+    {
+        userId:"sthallad@uncc.edu",
+        firstName:"Sai Kumar",
+        lastName:"Thallada",
+        emailAddress:"sthallad@uncc.edu",
+        address1Field:"205 Barton Creek Drive",
+        address2Field:"Apt#B",
+        city:"Charlotte",
+        state:"NC",
+        pinCode:28262,
+        country:"US"
+    }
+);
+db.connections.insertMany([
+  {
+    userId:"sthallad@uncc",
+    connectionId: 1001,
+    connection_name: 'The Testaments: The Sequel to The Handmaid\'s Tale',
+    connection_category: 'Book Club',
+    details: 'More than fifteen years after the events of The Handmaid\'s Tale, the theocratic regime of the Republic of Gilead maintains its grip on power, but there are signs it is beginning to rot from within. At this crucial moment, the lives of three radically different women converge, with potentially explosive results. Two have grown up as part of the first generation to come of age in the new order. The testimonies of these two young women are joined by a third: Aunt Lydia.  Her complex past and uncertain future unfold in surprising and pivotal ways. With The Testaments, Margaret Atwood opens up the innermost workings of Gilead, as each woman is forced to come to terms with who she is, and how far she will go for what she believes.',
+    dateAndTime: 'Oct 7th 4.30 AM',
+    hostedBy: 'Margaret Atwood',
+    image: '../assets/images/conImages/con1.jpg'
+  },
+  {
+    userId:"sthallad@uncc",
+    connectionId: 1002,
+    connection_name: 'Daisy Jones & The Six: A Novel',
+    connection_category: 'Book Club',
+    details: 'Everyone knows DAISY JONES & THE SIX, but nobody knows the reason behind their split at the absolute height of their popularity . . . until now. Daisy is a girl coming of age in L.A. in the late sixties, sneaking into clubs on the Sunset Strip, sleeping with rock stars, and dreaming of singing at the Whisky a Go Go. The sex and drugs are thrilling, but it’s the rock ’n’ roll she loves most. By the time she’s twenty, her voice is getting noticed, and she has the kind of heedless beauty that makes people do crazy things. Also getting noticed is The Six, a band led by the brooding Billy Dunne. On the eve of their first tour, his girlfriend Camila finds out she’s pregnant, and with the pressure of impending fatherhood and fame, Billy goes a little wild on the road.  Daisy and Billy cross paths when a producer realizes that the key to supercharged success is to put the two together. What happens next will become the stuff of legend.  The making of that legend is chronicled in this riveting and unforgettable novel, written as an oral history of one of the biggest bands of the seventies. Taylor Jenkins Reid is a talented writer who takes her work to a new level with Daisy Jones & The Six, brilliantly capturing a place and time in an utterly distinctive voice.',
+    dateAndTime: 'Oct 15th 5.30 AM',
+    hostedBy: 'Taylor Jenkins Reid',
+    image: '../assets/images/conImages/con2.jpg'
+  },
+  {
+    userId:"sthallad@uncc",
+    connectionId: 1003,
+    connection_name: 'Dr. Tracey Benson presents Unconscious Bias in Schools',
+    connection_category: 'Events',
+    details: 'According to Benson, regardless of the amount of effort, time, and resources educators put into improving the academic achievement of students of color, if unconscious racial bias is overlooked, improvement efforts may never achieve their highest potential. His newly released book, Unconscious Bias in Schools, provides educators with an essential roadmap for addressing these issues directly. The book draws on the literature on change management, leadership, critical race theory, and racial identity development, as well as the growing research on unconscious bias in a variety of fields, to provide guidance for creating the conditions necessary to do this work—awareness, trust, and a learner’s stance. It shows how raising awareness about unconscious bias can help shift conversations among educators to a more productive, collegial approach that has the potential to disrupt the patterns of perception that perpetuate racism and institutional injustice.',
+    dateAndTime: 'Monday, February 24, 2020 - 7:00pm to 8:30pm',
+    hostedBy: 'Dr. Tracey Benson',
+    image: '../assets/images/conImages/con5.PNG'
+  },
+  {
+    userId:"sthallad@uncc",
+    connectionId: 1004,
+    connection_name: 'Jen Guberman presents EOS Dawn Series',
+    connection_category: 'Events',
+    details: 'Immerse yourself in the dystopian world of the Eos Dawn Series, a trilogy by Jen Guberman. In a post-war California, survivors rebuilt cities. With the population lower than ever, citizens had to resort to exiling criminals. Instead of casting them into a desert wasteland, they sent criminals off to ruined towns based on their crimes. When a young thief is exiled to Avid, a town full of thieves, she learns that the bad guys aren\'t always who they seem. ',
+    dateAndTime: 'Saturday, February 22, 2020 - 11:00am to 1:00pm',
+    hostedBy: 'Jen Guberman',
+    image: '../assets/images/conImages/con6.PNG'
+  }
+]);
+db.userprofiles.insertOne(
+    {
+        userId:"sthallad@uncc.edu",
+        userConnection:[
+            {
+                connectionId:1002,
+                rsvp:'yes'
+            },
+            {
+                connectionId:1004,
+                rsvp:'no'
+            }
+        ]
+    }
+);

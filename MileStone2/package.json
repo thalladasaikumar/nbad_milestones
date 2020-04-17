@@ -1,0 +1,15 @@
+{
+  "name": "milestone-2",
+  "version": "1.0.0",
+  "description": "MileStone 2 to push the sttic webpages into routes, views and partials",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thallada Sai Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  }
+}

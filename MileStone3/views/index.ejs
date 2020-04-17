@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book Depot</title>
+  <meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+</head>
+<body>
+	<header>
+		<%- include('partials/header.ejs')%>
+	</header>
+	<header>
+		<%- include('partials/navigation.ejs')%>
+	</header>
+
+	<section id="slideshow">
+		<section id="content">
+			<h1>Welcome to Online Book Depot</h1>
+			<h3>Start learning.</h3>
+			<p>
+				Here you can find the books online and join book clubs and events.
+			</p>
+			<p>
+				Check out connections sections for next events and clubs.
+			</p>
+
+			<button onclick="window.location.href = 'connections'"> Connections </button>
+
+		</section>
+	</section>
+
+
+	<footer>
+		<%- include('partials/footer.ejs') %>
+	</footer>
+</body>
+</html>

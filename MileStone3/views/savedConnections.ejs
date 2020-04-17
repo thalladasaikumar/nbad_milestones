@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Connections Page</title>
+	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+</head>
+<body>
+	<header>
+		<%- include('partials/header.ejs')%>
+	</header>
+	<header>
+		<%- include('partials/navigation.ejs')%>
+	</header>
+	<% if(userProfileSession.getConnectionsList().length>0){ %>
+		<section id="connectionsSection">
+			<table>
+				<tr>
+					<th>Connections</th>
+					<th>Category</th>
+					<th>Going?</th>
+					<th></th>
+				</tr>
+				<% userProfileSession.getConnectionsList().forEach(function(item){ %>
+					<tr>
+						<td><%= item.getConnection.getConnection_name %></td>
+						<td><%= item.getConnection.getConnection_category %></td>
+						<td><%= item.getRSVP %></td>
+						<td>
+							<form class="">
+								<button class="responsebutton" formmethod="post" formaction='connection?id=<%=item.getConnection.getConnectionId%>&action=update' >Update</button>
+								 &nbsp; &nbsp; &nbsp;
+								 <button class="responsebutton" formmethod="post" formaction='savedConnections?id=<%=item.getConnection.getConnectionId%>&action=delete' >Delete</button></td>
+							</form>
+					</tr>
+				<% }) %>
+			</table>
+		</section>
+	<% } else{ %>
+		<p>Please select few connections from connections tab</p>
+	<% } %>
+
+	<footer>
+		<%- include('partials/footer.ejs')%>
+	</footer>
+</body>
+</html>

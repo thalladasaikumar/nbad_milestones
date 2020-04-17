@@ -1,0 +1,15 @@
+<a href="/"><img class="logo" src="../../assets/images/logo.png" alt="Logo Image"></a>
+
+<% if(session==undefined){ %>
+  <nav>
+    <a href="newConnection"> Start a new connection </a>
+    <a href="login"> Login </a>
+    <a href="signup"> Sign Up! </a>
+  </nav>
+<% } else { %>
+  <nav>
+    <a href="newConnection"> Start a new connection </a>
+    <a href="savedConnections"> My Connections </a>
+    <a href="logout"> Sign Out </a>
+  </nav>
+<% } %>
