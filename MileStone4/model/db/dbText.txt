@@ -1,5 +1,5 @@
-use nbad;
 db.dropDatabase();
+use nbad;
 db.createCollection('connections');
 db.createCollection('userprofiles');
 db.createCollection('users');
