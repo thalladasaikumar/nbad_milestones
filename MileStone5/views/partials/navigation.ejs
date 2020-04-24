@@ -1,0 +1,8 @@
+<nav id="subheadernav">
+  <% if(session!=undefined){ %>
+    <a href="connections"> Connections </a>
+    <a style="margin-left:763px">Welcome User <%= session.getFirstName %> </a>
+  <% } else { %>
+    <a href="connections"> Connections </a>
+  <% } %>
+</nav>

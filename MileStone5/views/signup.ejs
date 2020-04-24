@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+    <title>Login</title>
+  </head>
+  <body>
+    <header>
+      <%- include('partials/header.ejs')%>
+    </header>
+    <header>
+      <%- include('partials/navigation.ejs')%>
+    </header>
+
+    <section id="content">
+			<h1>Welcome Online Book Depot</h1>
+			<p>
+				Please enter below details to Signup!
+			</p>
+      <form action="/createAccount" method="post">
+        <table>
+          <tr>
+            <td><input type="text" name="firstname" value="" placeholder="First Name" required></td>
+            <td><input type="text" name="lastname" value="" placeholder="Last Name" required></td>
+          </tr>
+          <tr>
+            <td><label class="label"> Username </label></td>
+            <td><input type="text" name="username" value="" required></td>
+          </tr>
+          <tr>
+            <td><label class="label"> Email </label></td>
+            <td><input type="email" name="email" value="" required></td>
+          </tr>
+          <tr>
+            <td><input type="password" name="password" value="" placeholder="Password"></td>
+            <td><input type="password" name="confirm_password" value="" placeholder="Confirm Password"></td>
+          </tr>
+          <tr>
+              <td><input type="text" name="address1Field" value="" placeholder="Address" required></td>
+              <td><input type="text" name="address2Field" value="" placeholder="Apartment/Suite"></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="city" value="" placeholder="City" required></td>
+            <td><input type="text" name="state" value="" placeholder="State" required></td>
+          </tr>
+          <tr>
+            <td><input type="text" name="country" value="" placeholder="Country" required></td>
+            <td><input type="text" name="zip" value="" placeholder="Zip Code" required></td>
+          </tr>
+          <tr>
+            <td></td><td><input type="submit" value="Sign up"></td>
+          </tr>
+        </table>
+      </form>
+		</section>
+    <!-- <footer>
+  		<%- include('partials/footer.ejs') %>
+  	</footer> -->
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>New Connection</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+	</head>
+	<body>
+    <header>
+      <%- include('partials/header.ejs')%>
+    </header>
+    <header>
+      <%- include('partials/navigation.ejs')%>
+    </header>
+		<section>
+      <div class="newconnect_form">
+        <form action='/addConnection' method='post'>
+          <table class="newconnect">
+              <tr>
+                <td><label class="label"> Connection Category:  </label></td>
+                <td><input class="textbox" type="text" placeholder="Category Name" name="connection_category" required></td>
+              </tr>
+              <tr>
+                <td><label class="label"> Connection Name:  </label></td>
+                <td><input class="textbox" type="text" placeholder="Name" name="connection_name" required></td>
+              </tr>
+              <tr>
+                <td><label class="label"> Connection Details: </label></td>
+                <td><textarea rows="10" cols="100" placeholder="Details" name="details" required></textarea></td>
+              </tr>
+              <tr>
+                <td><label class="label"> Hosted By: </label></td>
+                <td><input class="textbox" type="text" placeholder="Hosted By" name="hostedBy" required></td>
+              </tr>
+              <tr>
+                <td><label class="label"> When </label></td>
+                <td><input class="textbox" type="date" name="dateAndTime" required></td>
+              </tr>
+							<tr>
+                <td><label class="label"> Image Url </label></td>
+                <td><input class="textbox" type="text" name="image"></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input  type="submit" value="Submit">
+                </td>
+              </tr>
+          </table>
+        </form>
+  	</div>
+	</section>
+  <footer>
+    <%- include('partials/footer.ejs') %>
+  </footer>
+	</body>
+</html>
