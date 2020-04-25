@@ -1,0 +1,41 @@
+use Courses
+db.dropDatabase()
+db.createCollection('courses')
+db.courses.insertMany([
+    {
+        code:"6114",
+        title:"Data Structures",
+        term:"Spring2020",
+        instructor:"Dewan",
+        startTime: "10:00",
+        endTime:"11:10",
+        email:"dewan@uncc.edu"
+    },
+    {
+        code:"6114",
+        title:"Data Structures",
+        term:"Spring2020",
+        instructor:"Qiong Cheng",
+        startTime: "11:00",
+        endTime:"12:10",
+        email:"cheng@uncc.edu"
+    },
+    {
+        code:"6150",
+        title:"Intelligent Systems",
+        term:"Spring2020",
+        instructor:"Dewan",
+        startTime: "12:00",
+        endTime:"13:10",
+        email:"dewan@uncc.edu"
+    },
+    {
+        code:"6150",
+        title:"Intelligent Systems",
+        term:"Spring2020",
+        instructor:"Ras",
+        startTime: "14:00",
+        endTime:"15:10",
+        email:"wras@uncc.edu"
+    }
+])

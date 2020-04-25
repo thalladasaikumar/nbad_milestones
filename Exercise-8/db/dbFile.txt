@@ -1,0 +1,29 @@
+use Courses
+db.dropDatabase()
+db.createCollection('courses')
+db.courses.insertMany([
+    {
+        code:"6114",
+        title:"Data Structures",
+        term:"Spring2020",
+        instructor:"Dewan"
+    },
+    {
+        code:"6114",
+        title:"Data Structures",
+        term:"Spring2020",
+        instructor:"Qiong Cheng"
+    },
+    {
+        code:"6150",
+        title:"Intelligent Systems",
+        term:"Spring2020",
+        instructor:"Dewan"
+    },
+    {
+        code:"6150",
+        title:"Intelligent Systems",
+        term:"Spring2020",
+        instructor:"Ras"
+    }
+])

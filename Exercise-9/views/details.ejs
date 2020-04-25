@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercise - 3</title>
+    <link rel="stylesheet" href="/assets/stylesheets/main.css">
+  </head>
+  <body>
+    <div>
+      <table>
+        <tr><th>CourseId</th><th>Title</th><th>Term</th><th>Instructor</th><th>Course Start Time</th><th>Course End Time</th><th>Instructor email</th></tr>
+        <tr>
+          <td><%= course.courseId %></td>
+          <td><%- course.title %></td>
+          <td><%- course.term %></td>
+          <td><%- course.instructor %></td>
+          <td><%= course.startTime %></td>
+          <td><%= course.endTime %></td>
+          <td><%- course.email %></td>
+        </tr>
+        <tr><td colspan="10"><%- include('images.ejs') %></td></tr>
+      </table>
+    </div>
+  </body>
+</html>

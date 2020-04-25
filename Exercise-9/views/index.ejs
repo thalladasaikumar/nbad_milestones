@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("button").click(function(){
+          $("#coursesList").toggle();
+        });
+      });
+    </script>
+
+  <title></title>
+  </head>
+  <body>
+    <h1>Course form </h1>
+    <h3>Welcome</h3>
+    <div class="">
+      <p>To view list of allCourses:</p>
+      <button name="button">list of courses</button>
+    </div>
+    <div id="coursesList" style="display: none;">
+      <% if(savedCourses.length>0){ %>
+      <table class="TableAttr">
+      <tbody>
+        <tr>
+          <th>CourseId</th>
+          <th>Course Title</th>
+          <th>Instructor</th>
+          <th>Term</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Email</th>
+        </tr>
+        <% savedCourses.forEach(function(item){ %>
+        <tr>
+          <td><%= item.code %></td>
+          <td><%- item.title %></td>
+          <td><%- item.instructor %></td>
+          <td><%- item.term %></td>
+          <td><%= item.startTime %></td>
+          <td><%= item.endTime %></td>
+          <td><%- item.email %></td>
+        </tr>
+      </tbody>
+        <% }); %>
+        </table>
+        <% } %>
+    </div>
+
+    <p>Filter courses by course id: </p>
+    <div class="error-message" style="color:red">
+      
+    </div>
+    <form class="" action="/" method="get">
+      <input type="text" name="courseidValue" value="">
+      <input type="submit" value="Search Course">
+    </form>
+    <% if(foundCourses.length>0){ %>
+      <div>
+        <table class="TableAttr">
+          <tr>
+            <th>CourseId</th>
+            <th>Course Title</th>
+            <th>Instructor</th>
+            <th>Term</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Email</th>
+          </tr>
+        <% foundCourses.forEach(function(item){ %>
+          <tr>
+            <td><%= item.code %></td>
+            <td><%- item.title %></td>
+            <td><%- item.instructor %></td>
+            <td><%- item.term %></td>
+            <td><%= item.startTime %></td>
+            <td><%= item.endTime %></td>
+            <td><%- item.email %></td>
+          </tr>
+        <% }) %>
+        </table>
+      </div>
+    <% } %>
+
+    <div class="error-message" style="color:red">
+      <% if(errorMsg.length>0){ %>
+        <% errorMsg.forEach(function(item){ %>
+          <p><span><%= item.msg %></span></p>
+        <% }); %>
+      <% } %>
+    </div>
+
+    <p>Form posted count : <strong><%= hits %></strong></p>
+    <form id="courseForm" method="post" action="/courseDetails">
+      <table>
+        <tr>
+          <td><label for="CourseID">CourseID</label></td>
+          <td><input type="text" name="courseId" value=""><br></td>
+        </tr>
+        <tr>
+          <td><label for="Title">Title</label></td>
+          <td><input type="text" name="title" value=""><br></td>
+        </tr>
+        <tr>
+          <td><label for="Term">Term</label></td>
+          <td><input type="text" name="term"></td>
+        </tr>
+        <tr>
+          <td><label for="Instructor">Instructor</label></td>
+          <td><input type="text" name="instructor"></td>
+        </tr>
+        <tr>
+          <td><label for="startTime">Start Time</label></td>
+          <td><input type="time" name="startTime"></td>
+        </tr>
+        <tr>
+          <td><label for="endTime">End Time</label></td>
+          <td><input type="time" name="endTime"></td>
+        </tr>
+        <tr>
+          <td><label for="email">Email Address</label></td>
+          <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" value="submit"></td>
+        </tr>
+      </table>
+    </form>
+    <style>
+      .TableAttr {
+          margin: 20px 0;
+          border: 1px #2b2b2b solid;
+          border-collapse: collapse;
+      }
+      .TableAttr th {
+          border: 1px #2b2b2b solid;
+               padding: 3px 10px 3px 10px;
+          background-color: #f0f0ff;
+          vertical-align: top;
+      }
+      .TableAttr td {
+          border: 1px #2b2b2b solid;
+          padding: 3px 10px 3px 10px;
+          vertical-align: top;
+      }
+    </style>
+  </body>
+</html>
