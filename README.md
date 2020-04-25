@@ -1,2 +1,2 @@
-# nbad_milestones
-Network Based Application course work from Masters
+# Network Based Application course work
+  This repository contains all the exercises and milestones.
