@@ -89,12 +89,11 @@ module.exports = class UserInfo{
 
   async validateUser(username, password){
     try{
-
       return new Promise(async (resolve, reject) => {
         userPasswordModel.find({username:username},async function (err, data){
           if(err){
             reject(err);
-          } else{
+          } else if(data.length>0){
             let compared = await bcrypt.compare(password, data[0].password);
             console.log('Compare:',compared)
             if(compared){
@@ -102,6 +101,8 @@ module.exports = class UserInfo{
             } else{
               reject(err);
             }
+          } else{
+            reject(err);
           }
         });
       })
@@ -130,7 +131,6 @@ module.exports = class UserInfo{
   async addUserCredentials(username, password){
     try{
       let hash = await bcrypt.hash(password,saltRounds);
-      console.log('Hash:',hash)
       return new Promise(async (resolve, reject) => {
         new userPasswordModel({username:username, password:hash}).save(function (err, data){
           if(err){

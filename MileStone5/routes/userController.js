@@ -47,8 +47,8 @@ function conObjList(activeUserProfile){
 const validation = [
   check('username').trim().not()
     .isEmpty().withMessage('username is required')
-    .matches(/[\w]+/).withMessage('Username can\'t be just spaces'),
-  check('password').trim().not().isEmpty().withMessage('password is required')
+    .matches(/[\w]+/).withMessage('Username can\'t be just spaces').escape(),
+  check('password').trim().not().isEmpty().withMessage('password is required').escape()
 ];
 
 async function handleValidationErrors(req, res, next){
@@ -57,14 +57,20 @@ async function handleValidationErrors(req, res, next){
   if(!errors.isEmpty()){
     return res.render('login',{session: undefined, errorMsg:errors.array(), successMsg: new Array()});
   } else{
-    let userDetails = await new userDB().validateUser(req.body.username, req.body.password);
+    try{
+      let userDetails = await new userDB().validateUser(req.body.username, req.body.password);
     if(userDetails.length>0){
       userProfileObj = new userProfile(req.body.username, new Array());
       req.session.userSession = userProfileObj;
     } else{
       errorMsg = new Array({msg:'Username and password mismatch, please login again!!'});
-      return res.render('login',{session: undefined, errorMsg:errorMsg});
+      return res.render('login',{session: undefined, errorMsg:errorMsg, successMsg:new Array()});
     }
+    } catch(err){
+      errorMsg = new Array({msg:'Username and password mismatch, please login again!!'});
+      return res.render('login',{session: undefined, errorMsg:errorMsg, successMsg:new Array()});
+    }
+    
   }
   next();
 }
@@ -78,7 +84,7 @@ router.post('/login', urlencodedParser, validation, handleValidationErrors, assi
     }
   } catch(err){
     console.error(err);
-    return res.render('login',{session: undefined, errorMsg: err});
+    return res.render('login',{session: undefined, errorMsg: err, successMsg:new Array()});
   }
 });
 

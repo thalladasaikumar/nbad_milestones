@@ -159,7 +159,8 @@ router.post('/newConnection', urlencodedParser, [
   check('dateAndTime').trim().not().isEmpty()
   .withMessage('Connection date and time is mandatory').isAfter(new Date().toString())
   .withMessage('Connection date and time should be future date').escape(),
-  check('hostedBy','Connection hosted by is mandatory').trim().not().isEmpty().escape()
+  check('hostedBy','Connection hosted by is mandatory').trim().not().isEmpty().escape(),
+  check('image').trim().escape()
 ],sessionCheck, async function(req, res){
   const errors = validationResult(req);
   if(!errors.isEmpty()){
