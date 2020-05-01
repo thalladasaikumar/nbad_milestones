@@ -15,11 +15,11 @@
 	<section id="connectionsSection">
 		<section id="bookclub">
 			<% categories.forEach(function(data){ %>
-				<h3><%= data %></h3>
+				<h3><%- data %></h3>
 				<ul>
 				<% connections.forEach(function(item){ %>
 					<% if(item.getConnection_category == data){ %>
-					<li><a class="link" href="connection?id=<%= item.getConnectionId%>"><%= item.getConnection_name %></a></li>
+					<li><a class="link" href="connection?id=<%= item.getConnectionId%>"><%- item.getConnection_name %></a></li>
 					<% } %>
 				<% }) %>
 				</ul>

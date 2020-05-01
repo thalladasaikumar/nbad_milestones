@@ -11,7 +11,9 @@ module.exports = class userProfileDB {
   */
   async addNewUserProfile(userId, conn, rsvp){
     return new Promise(async (resolve, reject) => {
-      new userProfileModel({userId:userId, userConnection:[{connectionId:conn.getConnectionId, rsvp: rsvp}]}).save(function(err, data){
+      // new userProfileModel({userId:userId, userConnection:[{connectionId:conn.getConnectionId, rsvp: rsvp}]}).save(function(err, data){
+        userProfileModel.updateOne({userId:userId},
+          {userId:userId, userConnection:[{connectionId:conn.getConnectionId, rsvp: rsvp}]}, {upsert:true}, function(err, data){
           if(err){
             console.error(err);
             reject('-----------');

@@ -13,8 +13,15 @@
       <%- include('partials/navigation.ejs')%>
     </header>
 		<section>
+      <div class="error-message" style="color:red">
+        <% if(errorMsg.length>0){ %>
+          <% errorMsg.forEach(function(item){ %>
+            <p><span><%= item.msg %></span></p>
+          <% }); %>
+        <% } %>
+      </div>
       <div class="newconnect_form">
-        <form action='/addConnection' method='post'>
+        <form action='/newConnection' method='post'>
           <table class="newconnect">
               <tr>
                 <td><label class="label"> Connection Category:  </label></td>

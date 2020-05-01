@@ -17,7 +17,21 @@
 			<h1>Welcome Online Book Depot</h1>
 			<p>
 				Please enter your username and password to login
-			</p>
+      </p>
+      <div class="error-message" style="color:red">
+        <% if(errorMsg.length>0){ %>
+          <% errorMsg.forEach(function(item){ %>
+            <p><span><%= item.msg %></span></p>
+          <% }); %>
+        <% } %>
+      </div>
+      <div class="success-message" style="color:blue">
+        <% if(successMsg.length>0){ %>
+          <% successMsg.forEach(function(item){ %>
+            <p><span><%= item.msg %></span></p>
+          <% }); %>
+        <% } %>
+      </div>
       <form action="/login" method="post">
         <table>
           <tr>

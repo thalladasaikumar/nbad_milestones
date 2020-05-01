@@ -22,9 +22,9 @@
 				</tr>
 				<% userProfileSession.getConnectionsList().forEach(function(item){ %>
 					<tr>
-						<td><%= item.getConnection.getConnection_name %></td>
-						<td><%= item.getConnection.getConnection_category %></td>
-						<td><%= item.getRSVP %></td>
+						<td><%- item.getConnection.getConnection_name %></td>
+						<td><%- item.getConnection.getConnection_category %></td>
+						<td><%- item.getRSVP %></td>
 						<td>
 							<form class="">
 								<button class="responsebutton" formmethod="post" formaction='connection?id=<%=item.getConnection.getConnectionId%>&action=update' >Update</button>

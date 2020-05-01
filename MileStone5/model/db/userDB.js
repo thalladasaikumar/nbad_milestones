@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const dbConnection = require('./dbConnection');
 const userModel = dbConnection.userModel;
-
+const userPasswordModel = dbConnection.userPasswordModel;
+const bcrypt = require('bcrypt');
+const saltRounds = Math.floor(Math.random()*10);
 
 module.exports = class UserInfo{
   constructor(){} //default constructor
@@ -80,6 +82,64 @@ module.exports = class UserInfo{
   async createUser(user){
     try{
       await this.saveUsertoDB(user);
+    } catch(err){
+      console.error(err);
+    }
+  }
+
+  async validateUser(username, password){
+    try{
+
+      return new Promise(async (resolve, reject) => {
+        userPasswordModel.find({username:username},async function (err, data){
+          if(err){
+            reject(err);
+          } else{
+            let compared = await bcrypt.compare(password, data[0].password);
+            console.log('Compare:',compared)
+            if(compared){
+              resolve(data);
+            } else{
+              reject(err);
+            }
+          }
+        });
+      })
+    }
+    catch (err){
+      console.err(err);
+    }
+  }
+
+  async getUserByEmail(email){
+    try{
+      return new Promise(async (resolve, reject) =>{
+        userModel.find({emailAddress:email}, function(err, data){
+          if(err){
+            reject(err);
+          } else{
+            resolve(data);
+          }
+        })
+      })
+    } catch(err){
+      console.error(err);
+    }
+  }
+
+  async addUserCredentials(username, password){
+    try{
+      let hash = await bcrypt.hash(password,saltRounds);
+      console.log('Hash:',hash)
+      return new Promise(async (resolve, reject) => {
+        new userPasswordModel({username:username, password:hash}).save(function (err, data){
+          if(err){
+            reject(err);
+          } else{
+            resolve(data);
+          }
+        });
+      });
     } catch(err){
       console.error(err);
     }

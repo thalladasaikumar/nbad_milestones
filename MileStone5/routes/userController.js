@@ -10,7 +10,10 @@ const userProfileDB = require('../model/db/userProfileDB');
 const connectionDB = require('../model/db/connectionDB');
 const utilObjClass = require('../model/util/objClass');
 const userDB = require('../model/db/userDB');
-
+const dbConnection = require('../model/db/dbConnection');
+//--------------------------------
+const {check, validationResult} = require('express-validator');
+//--------------------------------
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 let randomUser;
 async function assignSession(req, res, next){
@@ -41,7 +44,32 @@ function conObjList(activeUserProfile){
   return activeConsList;
 }
 
-router.post('/login', urlencodedParser, assignSession, async function(req, res){
+const validation = [
+  check('username').trim().not()
+    .isEmpty().withMessage('username is required')
+    .matches(/[\w]+/).withMessage('Username can\'t be just spaces'),
+  check('password').trim().not().isEmpty().withMessage('password is required')
+];
+
+async function handleValidationErrors(req, res, next){
+  const errors = validationResult(req);
+  let errorMsg;
+  if(!errors.isEmpty()){
+    return res.render('login',{session: undefined, errorMsg:errors.array(), successMsg: new Array()});
+  } else{
+    let userDetails = await new userDB().validateUser(req.body.username, req.body.password);
+    if(userDetails.length>0){
+      userProfileObj = new userProfile(req.body.username, new Array());
+      req.session.userSession = userProfileObj;
+    } else{
+      errorMsg = new Array({msg:'Username and password mismatch, please login again!!'});
+      return res.render('login',{session: undefined, errorMsg:errorMsg});
+    }
+  }
+  next();
+}
+
+router.post('/login', urlencodedParser, validation, handleValidationErrors, assignSession, async function(req, res){
   try{
     if(req.session.userSession){
       res.redirect('savedConnections');
@@ -50,7 +78,7 @@ router.post('/login', urlencodedParser, assignSession, async function(req, res){
     }
   } catch(err){
     console.error(err);
-    res.redirect('login');
+    return res.render('login',{session: undefined, errorMsg: err});
   }
 });
 
@@ -106,7 +134,7 @@ router.post('/savedConnections*', urlencodedParser, assignSession, async functio
 
 });
 
-router.get('/savedConnections*',assignSession, async function (req, res) {
+router.get('/savedConnections', assignSession, async function (req, res) {
   var activeUserProfile = req.session.userSession;
   if(activeUserProfile==undefined){
     res.redirect('login');

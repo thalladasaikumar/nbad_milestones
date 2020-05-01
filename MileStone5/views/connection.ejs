@@ -17,16 +17,16 @@
 	</header>
 
 	<section id="connectiondetail">
-		<h3><%= connection.getConnection_name %></h3>
+		<h3><%- connection.getConnection_name %></h3>
 			<p>
 				<img alt="" src="<%= connection.getImage %>" style="margin-left: 10px; margin-right: 10px; float: left; width: 127px; height: 180px;">
 			</p>
-			<p class="authorpara"><%= connection.getDetails %></p>
+			<p class="authorpara"><%- connection.getDetails %></p>
 			<p class="authorpara">
 				Event date: <span class="eventdate"> <%= connection.getDateAndTime %></span>
 			</p>
 			<p class="authorpara">
-				Hosted By: <span class="eventdate"> <%= connection.getHostedBy %></span>
+				Hosted By: <span class="eventdate"> <%- connection.getHostedBy %></span>
 			</p>
 			 <h2>Are you going?</h2> &nbsp; &nbsp;
 			 <form class="" action="<% if(session!=undefined){ %>
