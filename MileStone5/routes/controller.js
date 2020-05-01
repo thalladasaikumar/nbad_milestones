@@ -8,6 +8,7 @@ const userDB = require('../model/db/userDB');
 const connectionDB = require('../model/db/connectionDB');
 const utilObjClass = require('../model/util/objClass');
 const userProfileDB = require('../model/db/userProfileDB');
+const userConnection = require('../model/userConnection');
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 // ---------------------------------------------
 const {check, validationResult} = require('express-validator');
@@ -113,11 +114,11 @@ async function handleValidationErrors(req, res, next){
     let usernameCheck = await new userDB().getUserByEmail(req.body.email);
     if(usernameCheck.length>0){
       if(req.body.username === usernameCheck[0].userId && req.body.email === usernameCheck[0].emailAddress){
-        return res.render('signup',{session:undefined, errorMsg: new Array('Username and is already taken')});
+        return res.render('signup',{session:undefined, errorMsg: new Array({msg:'Username and is already taken'})});
       } else if(req.body.email === usernameCheck[0].emailAddress){
-        return res.render('signup',{session:undefined, errorMsg: new Array('Email is already used')});
+        return res.render('signup',{session:undefined, errorMsg: new Array({msg:'Email is already used'})});
       } else {
-        return res.render('signup',{session:undefined, errorMsg: new Array('Username is already used')});
+        return res.render('signup',{session:undefined, errorMsg: new Array({msg:'Username is already used'})});
       }
     }
   }
@@ -132,7 +133,7 @@ router.post('/signup', urlencodedParser, validation, handleValidationErrors, /*s
     await userDBObj.createUser(new user(req_body.username, req_body.firstname,req_body.lastname,req_body.email,
       req_body.address1Field,req_body.address2Field,req_body.city,req_body.state,req_body.zip,req_body.country));
     await userDBObj.addUserCredentials(req_body.username, req_body.password);
-    res.render('login',{session:undefined, errorMsg: new Array(), successMsg: new Array('Signed up successfully, please login')});
+    res.render('login',{session:undefined, errorMsg: new Array(), successMsg: new Array({msg:'Signed up successfully, please login'})});
   } catch(err){
     console.error(err);
   }
@@ -150,35 +151,40 @@ function conObjList(activeUserProfile){
 }
 
 router.post('/newConnection', urlencodedParser, [
-  check('connection_name','Connection name should if minimum length 5 characters').not().isEmpty().trim().isLength({min:5}).escape(),
-  check('connection_category','Connection Category should if minimum 2 characters').not().isEmpty().trim().isLength({min:2}).escape(),
-  check('details','Connection details should if minimum 10 characters').not().isEmpty().trim().isLength({min:10}).escape(),
-  check('dateAndTime','Connection date and time is mandatory').not().isEmpty().trim().escape(),
-  check('hostedBy','Connection hosted by is mandatory').not().isEmpty().trim().escape()
+  check('connection_name','Connection name should if minimum length 5 characters').trim().not().isEmpty().isLength({min:5}).escape(),
+  check('connection_category','Connection Category should if minimum 2 characters').trim().not().isEmpty().isLength({min:2}).escape(),
+  check('details').trim().not().isEmpty()
+    .withMessage('Connection details is required').isLength({min:10})
+    .withMessage('Connection details should be minimum 10 characters').escape(),
+  check('dateAndTime').trim().not().isEmpty()
+  .withMessage('Connection date and time is mandatory').isAfter(new Date().toString())
+  .withMessage('Connection date and time should be future date').escape(),
+  check('hostedBy','Connection hosted by is mandatory').trim().not().isEmpty().escape()
 ],sessionCheck, async function(req, res){
   const errors = validationResult(req);
   if(!errors.isEmpty()){
     return res.render('newConnection',{session: sessionInput, errorMsg:errors.array()});
-  }
-  try{
-    const connectionDBObj = new connectionDB();
-    const userProfileDBObj = new userProfileDB();
-    const connectionId = await connectionDBObj.getNewSequenceNumber();
-    const req_body = req.body;
-    const con = new connection(connectionId, req_body.connection_name, req_body.connection_category, req_body.details, req_body.dateAndTime, req_body.hostedBy, req_body.image);
-    await connectionDBObj.saveConnection(sessionInput.getUserId, con);
-
-    const activeUserProfile = req.session.userSession;
-    let activeUserProfileList = conObjList(activeUserProfile);
-    if(activeUserProfileList.length>0){
-      await userProfileDBObj.addRSVP(sessionInput.getUserId, con, 'yes');
-    } else{
-      await userProfileDBObj.addNewUserProfile(activeUserProfile.userId, con, 'yes');
+  } else{
+    try{
+      const connectionDBObj = new connectionDB();
+      const userProfileDBObj = new userProfileDB();
+      const connectionId = await connectionDBObj.getNewSequenceNumber();
+      const req_body = req.body;
+      const con = new connection(connectionId, req_body.connection_name, req_body.connection_category, req_body.details, req_body.dateAndTime, req_body.hostedBy, req_body.image);
+      await connectionDBObj.saveConnection(sessionInput.getUserId, con);
+  
+      const activeUserProfile = req.session.userSession;
+      let activeUserProfileList = conObjList(activeUserProfile);
+      if(activeUserProfileList.length>0){
+        await userProfileDBObj.addRSVP(sessionInput.getUserId, con, 'yes');
+      } else{
+        await userProfileDBObj.addNewUserProfile(activeUserProfile.userId, con, 'yes');
+      }
+  
+      res.redirect('savedConnections');
+    } catch(err){
+      console.error(err);
     }
-
-    res.redirect('savedConnections');
-  } catch(err){
-    console.error(err);
   }
 });
 
