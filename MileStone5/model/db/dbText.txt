@@ -3,6 +3,7 @@ use nbad;
 db.createCollection('connections');
 db.createCollection('userprofiles');
 db.createCollection('users');
+db.createCollection('userpasswords);
 db.users.insertOne(
     {
         userId:"sthallad@uncc.edu",
@@ -19,7 +20,7 @@ db.users.insertOne(
 );
 db.connections.insertMany([
   {
-    userId:"sthallad@uncc",
+    userId:"sthallad@uncc.edu",
     connectionId: 1001,
     connection_name: 'The Testaments: The Sequel to The Handmaid\'s Tale',
     connection_category: 'Book Club',
@@ -29,7 +30,7 @@ db.connections.insertMany([
     image: '../assets/images/conImages/con1.jpg'
   },
   {
-    userId:"sthallad@uncc",
+    userId:"sthallad@uncc.edu",
     connectionId: 1002,
     connection_name: 'Daisy Jones & The Six: A Novel',
     connection_category: 'Book Club',
@@ -39,7 +40,7 @@ db.connections.insertMany([
     image: '../assets/images/conImages/con2.jpg'
   },
   {
-    userId:"sthallad@uncc",
+    userId:"sthallad@uncc.edu",
     connectionId: 1003,
     connection_name: 'Dr. Tracey Benson presents Unconscious Bias in Schools',
     connection_category: 'Events',
@@ -49,7 +50,7 @@ db.connections.insertMany([
     image: '../assets/images/conImages/con5.PNG'
   },
   {
-    userId:"sthallad@uncc",
+    userId:"sthallad@uncc.edu",
     connectionId: 1004,
     connection_name: 'Jen Guberman presents EOS Dawn Series',
     connection_category: 'Events',
@@ -74,3 +75,8 @@ db.userprofiles.insertOne(
         ]
     }
 );
+
+db.userpasswords.insertOne({
+  username:"sthallad@uncc.edu",
+  password:"$2b$09$0dWF9eVE7YifwF59kpr0kOH/trgn1hEkhCbp74sdC2RD/j.cLgX8y"
+});

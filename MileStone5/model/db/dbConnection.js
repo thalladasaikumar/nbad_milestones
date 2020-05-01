@@ -54,7 +54,7 @@ const userPassword = new mongoose.Schema({
 const userModel = mongoose.model('user', userSchema); //Model for User
 const connectionModel = mongoose.model('connections', connectionSchema); //Model for Connection
 const userProfileModel = mongoose.model('userprofile', userProfileSchema); //Model for User Profile
-const userPasswordModel = mongoose.model('usepassword', userPassword); //Model for Username and password
+const userPasswordModel = mongoose.model('userpassword', userPassword); //Model for Username and password
 
 module.exports.userModel = userModel;
 module.exports.connectionModel = connectionModel;
