@@ -8,7 +8,7 @@
     <% if(session!=undefined){ %>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link disabled">Welcome User <%- session.getFirstName %></a>
+        <a class="nav-link disabled">Welcome <span class="h5"><%- session.getFirstName %></span></a>
       </li>
     </ul>
     <% } %>
