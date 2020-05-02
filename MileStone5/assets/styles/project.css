@@ -2,18 +2,19 @@
     color: #d00;
     content: "*";
 }
-input::-webkit-input-placeholder {
+input::-webkit-input-placeholder 
+{
     color:#d8dbdd !important;
-    }
+}
      
-    input:-moz-placeholder { /* Firefox 18- */
+input:-moz-placeholder { /* Firefox 18- */
     color:#d8dbdd !important;  
-    }
+}
      
-    input::-moz-placeholder {  /* Firefox 19+ */
+input::-moz-placeholder {  /* Firefox 19+ */
     color:#d8dbdd !important;  
-    }
+}
      
-    input:-ms-input-placeholder {  
+input:-ms-input-placeholder {  
     color:#d8dbdd !important;  
-    }
+}
