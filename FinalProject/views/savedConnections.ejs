@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Connections Page</title>
+	<%- include('partials/head.ejs')%>
+</head>
+<body>
+	<%- include('partials/header.ejs')%>
+	<%- include('partials/navigation.ejs')%>
+	
+	<% if(userProfileSession.getConnectionsList().length>0){ %>
+		<div class="jumbotron bg-white">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm col-lg-5">
+						<p class="lead font-weight-bolder">Connection</p>
+					</div>
+					<div class="col-sm col-lg-3">
+						<p class="lead font-weight-bolder">Category</p>
+					</div>
+					<div class="col-sm col-lg-2">
+						<p class="lead font-weight-bolder">Your Response</p>
+					</div>
+					<div class="col-sm col-lg-2"></div>
+				</div>
+				<% userProfileSession.getConnectionsList().forEach(function(item){ %>
+					<div class="row">
+						<div class="col-sm col-lg-5">
+							<p class="lead"><%- item.getConnection.getConnection_name %></p>
+						</div>
+						<div class="col-sm col-lg-3">
+							<p class="lead"><%- item.getConnection.getConnection_category %></p>
+						</div>
+						<div class="col-sm col-lg-2">
+							<p class="lead"><%= item.getRSVP %></p>
+						</div>
+						<div class="col-sm col-lg-2">
+							<div class="list-group list-group-horizontal-lg">
+								<form class="">
+									<button class="btn btn-primary" formmethod="post" formaction='connection?id=<%=item.getConnection.getConnectionId%>&action=update' >Update</button>
+									<button class="btn btn-danger" formmethod="post" formaction='savedConnections?id=<%=item.getConnection.getConnectionId%>&action=delete' >Delete</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				<% }) %>
+			</div>
+		</div>
+	<% } else{ %>
+		<div class="jumbotron bg-white">
+			<div class="container">
+			  <h1 class="display-4">Good to see you back</h1>
+			  <p class="lead">You havn't responded to any connections yet</p>
+			  <hr class="my-4">
+			  <p class="lead">Select connections through connections tab</p>
+			  <a class="btn btn-info btn-lg" href="connections" role="button">View Connections</a>
+			</div>
+		  </div>
+	<% } %>
+
+	<%- include('partials/footer.ejs')%>
+	
+</body>
+</html>

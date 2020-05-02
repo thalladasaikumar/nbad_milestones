@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Connections Page</title>
+	<%- include('partials/head.ejs')%>
+</head>
+<body>
+	<%- include('partials/header.ejs')%>
+	<%- include('partials/navigation.ejs')%>
+	
+	<div class="jumbotron bg-white">
+		<div class="container">
+			<% categories.forEach(function(data){ %>
+				<h1 class="display-4"><%- data %></h1>
+				<ul class="list-group list-group-flush">
+				<% connections.forEach(function(item){ %>
+					<% if(item.getConnection_category == data){ %>
+						<li class="list-group-item">
+							<a class="nav-link" href="connection?id=<%= item.getConnectionId%>"><%- item.getConnection_name %> </a>
+						</li>
+					<% } %>
+				<% }) %>
+				</ul>
+			<% }) %>
+		</div>
+	</div>
+
+		<%- include('partials/footer.ejs') %>
+		
+</body>
+</html>

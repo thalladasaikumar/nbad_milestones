@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Connections Page</title>
+	<%- include('partials/head.ejs')%>
+</head>
+<body>
+	<%- include('partials/header.ejs')%>
+	<%- include('partials/navigation.ejs')%>
+	
+	<div class="jumbotron bg-white">
+		<div class="container">
+			<h3><%- connection.getConnection_name %></h3>
+			<div class="row">
+			<% if(connection.getImage!=undefined) { %>
+				<div class="col-3">
+					<img alt="" src="<%- connection.getImage %>" style="width: 240px; height: 240px;">
+				</div>
+				<div class="col-7">
+					<p class="lead"> <%- connection.getDetails %> </p>
+				</div>
+				<div class="col-2">
+					<div class="list-group">
+						<li class="list-group-item">Are you going?</li>
+						<form class="" action="<% if(session!=undefined){ %>
+							savedConnections?id=<%=connection.getConnectionId%>&action=<%=action%>
+							<% } else { %>login <% } %>" method="<% if(session!=undefined){ %>post<% } else{ %>get<% } %>">
+			   				<button class="list-group-item list-group-item-action list-group-item-primary" name="response" value="yes">Yes</button>
+			   				<button class="list-group-item list-group-item-action list-group-item-danger" name="response" value="no"> No </button>
+			   				<button class="list-group-item list-group-item-action list-group-item-dark" name="response" value="maybe">Maybe?</button>
+			   				<input type="hidden" name="viewConnection" value="<%= connection.getConnectionId %>">
+						</form>
+					</div>
+				</div>
+			<% } else { %>
+				<div class="col-10">
+					<p class="lead"> <%- connection.getDetails %> </p>
+				</div>
+				<div class="col-2">
+					<div class="list-group">
+						<li class="list-group-item-flush">Are you going?</li>
+						<form class="" action="<% if(session!=undefined){ %>
+							savedConnections?id=<%=connection.getConnectionId%>&action=<%=action%>
+							<% } else { %>login <% } %>" method="<% if(session!=undefined){ %>post<% } else{ %>get<% } %>">
+			   				<button class="list-group-item list-group-item-action list-group-item-primary " name="response" value="yes">Yes</button>
+			   				<button class="list-group-item list-group-item-action list-group-item-danger" name="response" value="no"> No </button>
+			   				<button class="list-group-item list-group-item-action list-group-item-info" name="response" value="maybe">Maybe?</button>
+			   				<input type="hidden" name="viewConnection" value="<%= connection.getConnectionId %>">
+						</form>
+					</div>
+				</div>
+			<% } %>
+			</div>
+			<div class="row row-cols-2 broder-2">
+				<div class="col"><p class="lead h3"> Event Date </p></div>
+				<div class="col"><%- connection.getDateAndTime %></div>
+				<div class="col"><p class="lead h3"> Hosted By </p></div>
+				<div class="col"><%- connection.getHostedBy %></div>
+			</div>
+		</div>
+	</div>
+
+		<%- include('partials/footer.ejs')%>
+		
+</body>
+</html>
