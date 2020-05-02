@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+    <%- include('partials/head.ejs')%>
     <title>Contact Us</title>
   </head>
   <body>
-    <header>
-      <%- include('partials/header.ejs')%>
-    </header>
-    <header>
-      <%- include('partials/navigation.ejs')%>
-    </header>
+    <%- include('partials/header.ejs')%>
+    <hr class="my-1">
+    <%- include('partials/navigation.ejs')%>
 
-    <section id="content">
-			<h1>Contact US!</h1>
-			<p>
-				Contact Kumar ->
-			</p>
-			<p>
-				For any queries please do drop email 'sthallad@uncc.edu'
-			</p>
+    <div class="jumbotron bg-white">
+      <div class="container">
+        <h1 class="display-4">Contact US!</h1>
+        <p class="lead">Contact Kumar -></p>
+        <hr class="my-4">
+        <p class="lead">For any queries please do drop email 'sthallad@uncc.edu'</p>
+      </div>
+    </div>
 
-		</section>
-    <footer>
-  		<%- include('partials/footer.ejs') %>
-  	</footer>
+    <%- include('partials/footer.ejs') %>
+
   </body>
 </html>

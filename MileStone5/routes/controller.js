@@ -174,12 +174,11 @@ router.post('/newConnection', urlencodedParser, [
       const con = new connection(connectionId, req_body.connection_name, req_body.connection_category, req_body.details, req_body.dateAndTime, req_body.hostedBy, req_body.image);
       await connectionDBObj.saveConnection(sessionInput.getUserId, con);
   
-      const activeUserProfile = req.session.userSession;
-      let activeUserProfileList = conObjList(activeUserProfile);
+      const activeUserProfileList = await userProfileDBObj.getUserProfile(sessionInput.userId);
       if(activeUserProfileList.length>0){
         await userProfileDBObj.addRSVP(sessionInput.getUserId, con, 'yes');
       } else{
-        await userProfileDBObj.addNewUserProfile(activeUserProfile.userId, con, 'yes');
+        await userProfileDBObj.addNewUserProfile(sessionInput.userId, con, 'yes');
       }
   
       res.redirect('savedConnections');

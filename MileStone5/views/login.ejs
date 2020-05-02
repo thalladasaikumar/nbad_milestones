@@ -1,55 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+    <%- include('partials/head.ejs')%>
     <title>Login</title>
   </head>
   <body>
-    <header>
-      <%- include('partials/header.ejs')%>
-    </header>
-    <header>
-      <%- include('partials/navigation.ejs')%>
-    </header>
+    <%- include('partials/header.ejs')%>
+    <%- include('partials/navigation.ejs')%>
 
-    <section id="content">
-			<h1>Welcome Online Book Depot</h1>
-			<p>
-				Please enter your username and password to login
-      </p>
-      <div class="error-message" style="color:red">
-        <% if(errorMsg.length>0){ %>
-          <% errorMsg.forEach(function(item){ %>
-            <p><span><%= item.msg %></span></p>
-          <% }); %>
-        <% } %>
+    <div class="jumbotron bg-white">
+      <div class="container">
+        <h1 class="display-4">About Online Book Depot</h1>
+        <p class="lead">Please enter your username and password to login</p>
+        <hr class="my-4">
+        <div class="row">
+          <div class="col-sm col-lg-6 col-md-6">
+            <div class="error-message" style="color:red">
+              <% if(errorMsg.length>0){ %>
+                <% errorMsg.forEach(function(item){ %>
+                  <p><span><%= item.msg %></span></p>
+                <% }); %>
+              <% } %>
+            </div>
+            <div class="success-message" style="color:blue">
+              <% if(successMsg.length>0){ %>
+                <% successMsg.forEach(function(item){ %>
+                  <p><span><%= item.msg %></span></p>
+                <% }); %>
+              <% } %>
+            </div>
+            <form action="/login" method="post" class="required">
+              <div class="form-group">
+                <label for="exampleInputEmail1" class="control-label">Username </label>
+                <input type="text" class="form-control" name="username" aria-describedby="usernameHelp">
+                <small id="usernameHelp" class="form-text text-muted">We'll never share your details with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1" class="control-label">Password </label>
+                <input type="password" class="form-control" name="password">
+              </div>
+              <button type="submit" class="btn btn-primary">Log in</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="success-message" style="color:blue">
-        <% if(successMsg.length>0){ %>
-          <% successMsg.forEach(function(item){ %>
-            <p><span><%= item.msg %></span></p>
-          <% }); %>
-        <% } %>
-      </div>
-      <form action="/login" method="post">
-        <table>
-          <tr>
-            <td><label class="label"> Username </label></td>
-            <td><input type="text" name="username" value="" required></td>
-          </tr>
-          <tr>
-            <td><label class="label"> Password </label></td>
-            <td><input type="password" name="password" value=""></td>
-          </tr>
-          <tr>
-            <td></td><td><input type="submit" value="Login"></td>
-          </tr>
-        </table>
-      </form>
-		</section>
-    <footer>
-  		<%- include('partials/footer.ejs') %>
-  	</footer>
+    </div>
+    
+ 		<%- include('partials/footer.ejs') %>
+  	
   </body>
 </html>

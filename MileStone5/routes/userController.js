@@ -46,8 +46,7 @@ function conObjList(activeUserProfile){
 
 const validation = [
   check('username').trim().not()
-    .isEmpty().withMessage('username is required')
-    .matches(/[\w]+/).withMessage('Username can\'t be just spaces').escape(),
+    .isEmpty().withMessage('username is required').escape(),
   check('password').trim().not().isEmpty().withMessage('password is required').escape()
 ];
 
@@ -94,16 +93,19 @@ router.post('/savedConnections*', urlencodedParser, assignSession, async functio
     const userProfileDBObj = new userProfileDB();
     const connectionDBObj = new connectionDB();
     const activeUserProfile = req.session.userSession;
-    let activeUserProfileList = conObjList(activeUserProfile);
-    let userProfileObj = new userProfile(randomUser.getUserId, activeUserProfileList);
+    // let activeUserProfileList = conObjList(activeUserProfile);
+    // let userProfileObj = new userProfile(randomUser.getUserId, activeUserProfileList);
     let action = req.query.action;
     if(!action){
-      userProfileObj = await utilObjClassObj.stubProfilesToObj(activeUserProfile.userId);
-      res.render('savedConnections', {session: randomUser, userProfileSession: userProfileObj});
+      // const userProfileObj = await utilObjClassObj.stubProfilesToObj(activeUserProfile.userId);
+      // res.render('savedConnections', {session: randomUser, userProfileSession: userProfileObj});
+      res.redirect('savedConnections');
     } else{
       var connid = req.query.id;
       var connectionResponse = req.body.response;
       if(action == 'save' || action == 'update' || action == 'delete'){
+        let userProfileObj = await utilObjClassObj.stubProfilesToObj(activeUserProfile.userId);
+        const activeUserProfileList = userProfileObj.getConnectionsList();
         const connectionDetails = await connectionDBObj.getConnection(req.query.id);
         if(action == 'save'){
           if(activeUserProfileList.length>0){
@@ -127,9 +129,10 @@ router.post('/savedConnections*', urlencodedParser, assignSession, async functio
         } else if(action == 'delete'){
           await userProfileDBObj.removeConnection(activeUserProfile.userId, connectionDetails);
         }
-        userProfileObj = await utilObjClassObj.stubProfilesToObj(activeUserProfile.userId);
-        req.session.userSession = userProfileObj;
-        res.render('savedConnections',{session: randomUser, userProfileSession: userProfileObj});
+        // userProfileObj = await utilObjClassObj.stubProfilesToObj(activeUserProfile.userId);
+        // req.session.userSession = userProfileObj;
+        // res.render('savedConnections',{session: randomUser, userProfileSession: userProfileObj});
+        res.redirect('savedConnections')
       } else{
         res.redirect('connections');
       }
@@ -146,7 +149,6 @@ router.get('/savedConnections', assignSession, async function (req, res) {
     res.redirect('login');
   } else{
     const utilObjClassObj = new utilObjClass();
-    const userProfileDBObj = new userProfileDB();
     const userProfileObj = await utilObjClassObj.stubProfilesToObj(activeUserProfile.userId);
 
     res.render('savedConnections', {session: randomUser, userProfileSession: userProfileObj});

@@ -1,70 +1,87 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
-    <title>Login</title>
+    <%- include('partials/head.ejs')%>
+    <title>Sign up</title>
   </head>
   <body>
-    <header>
-      <%- include('partials/header.ejs')%>
-    </header>
-    <header>
-      <%- include('partials/navigation.ejs')%>
-    </header>
+    <%- include('partials/header.ejs')%>
+    <%- include('partials/navigation.ejs')%>
+    <div class="jumbotron bg-white">
+      <div class="container">
+        <h1 class="display-4">Welcome Online Book Depot</h1>
+        <p class="lead">Please enter below details to Signup!</p>
+        <hr class="my-4">
 
-    <section id="content">
-			<h1>Welcome Online Book Depot</h1>
-			<p>
-				Please enter below details to Signup!
-      </p>
-      
-      <div class="error-message" style="color:red">
-        <% if(errorMsg.length>0){ %>
-          <% errorMsg.forEach(function(item){ %>
-            <p><span><%= item.msg %></span></p>
-          <% }); %>
-        <% } %>
+        <div class="error-message" style="color:red">
+          <% if(errorMsg.length>0){ %>
+            <% errorMsg.forEach(function(item){ %>
+              <p><span><%= item.msg %></span></p>
+            <% }); %>
+          <% } %>
+        </div>
+
+        <form action='/signup' method='post' class="required">
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="firstname"class="control-label">First Name</label>
+              <input type="text" class="form-control" name="firstname" placeholder="Mark Evan">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="lastname"class="control-label">Last Name</label>
+              <input type="text" class="form-control" name="lastname" placeholder="Zucker">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="username"class="control-label">Username</label>
+              <input type="text" class="form-control" name="username" placeholder="">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="email"class="control-label">Email</label>
+              <input type="text" class="form-control" name="email" placeholder="email.example.com">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="password"class="control-label">Password</label>
+              <input type="text" class="form-control" name="password" placeholder="">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="confirm_password"class="control-label">Confirm Password</label>
+              <input type="text" class="form-control" name="confirm_password" placeholder="">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="address1Field"class="control-label">Address</label>
+              <input type="text" class="form-control" name="address1Field" placeholder="123 Creek Dr, long">
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="address2Field"class="">Apartment/Suite</label>
+              <input type="text" class="form-control" name="address2Field" placeholder="Apt#B">
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="zip"class="control-label">Zip Code</label>
+              <input type="text" class="form-control" name="zip" placeholder="12345">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <label for="city"class="control-label">City</label>
+              <input type="text" class="form-control" name="city" placeholder="Charlotte">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="state"class="control-label">State</label>
+              <input type="text" class="form-control" name="state" placeholder="North Carolina">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="country"class="control-label">Country</label>
+              <input type="text" class="form-control" name="country" placeholder="United States">
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Create Account</button>
+        </form>
       </div>
-
-      <form action="/signup" method="post">
-        <table>
-          <tr>
-            <td><input type="text" name="firstname" value="" placeholder="First Name" ></td>
-            <td><input type="text" name="lastname" value="" placeholder="Last Name" ></td>
-          </tr>
-          <tr>
-            <td><label class="label"> Username </label></td>
-            <td><input type="text" name="username" value="" ></td>
-          </tr>
-          <tr>
-            <td><label class="label"> Email </label></td>
-            <td><input type="text" name="email" value="" ></td>
-          </tr>
-          <tr>
-            <td><input type="password" name="password" value="" placeholder="Password"></td>
-            <td><input type="password" name="confirm_password" value="" placeholder="Confirm Password"></td>
-          </tr>
-          <tr>
-              <td><input type="text" name="address1Field" value="" placeholder="Address" ></td>
-              <td><input type="text" name="address2Field" value="" placeholder="Apartment/Suite"></td>
-          </tr>
-          <tr>
-            <td><input type="text" name="city" value="" placeholder="City" ></td>
-            <td><input type="text" name="state" value="" placeholder="State" ></td>
-          </tr>
-          <tr>
-            <td><input type="text" name="country" value="" placeholder="Country" ></td>
-            <td><input type="text" name="zip" value="" placeholder="Zip Code" ></td>
-          </tr>
-          <tr>
-            <td></td><td><input type="submit" value="Sign up"></td>
-          </tr>
-        </table>
-      </form>
-		</section>
-    <!-- <footer>
-  		<%- include('partials/footer.ejs') %>
-  	</footer> -->
+    </div>
+    <%- include('partials/footer.ejs') %>
   </body>
 </html>

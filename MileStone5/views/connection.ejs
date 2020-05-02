@@ -2,47 +2,65 @@
 <html>
 <head>
 	<title>Connections Page</title>
-	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<%- include('partials/head.ejs')%>
 </head>
 <body>
-	<header>
-		<%- include('partials/header.ejs')%>
-	</header>
-	<header>
-		<%- include('partials/navigation.ejs')%>
-	</header>
+	<%- include('partials/header.ejs')%>
+	<%- include('partials/navigation.ejs')%>
+	
+	<div class="jumbotron bg-white">
+		<div class="container">
+			<h3><%= connection.getConnection_name %></h3>
+			<div class="row">
+			<% if(connection.getImage!=undefined) { %>
+				<div class="col-3">
+					<img alt="" src="<%- connection.getImage %>" style="width: 240px; height: 240px;">
+				</div>
+				<div class="col-7">
+					<p class="lead"> <%- connection.getDetails %> </p>
+				</div>
+				<div class="col-2">
+					<div class="list-group">
+						<li class="list-group-item">Are you going?</li>
+						<form class="" action="<% if(session!=undefined){ %>
+							savedConnections?id=<%=connection.getConnectionId%>&action=<%=action%>
+							<% } else { %>login <% } %>" method="<% if(session!=undefined){ %>post<% } else{ %>get<% } %>">
+			   				<button class="list-group-item list-group-item-action list-group-item-primary" name="response" value="yes">Yes</button>
+			   				<button class="list-group-item list-group-item-action list-group-item-danger" name="response" value="no"> No </button>
+			   				<button class="list-group-item list-group-item-action list-group-item-dark" name="response" value="maybe">Maybe?</button>
+			   				<input type="hidden" name="viewConnection" value="<%= connection.getConnectionId %>">
+						</form>
+					</div>
+				</div>
+			<% } else { %>
+				<div class="col-10">
+					<p class="lead"> <%- connection.getDetails %> </p>
+				</div>
+				<div class="col-2">
+					<div class="list-group">
+						<li class="list-group-item-flush">Are you going?</li>
+						<form class="" action="<% if(session!=undefined){ %>
+							savedConnections?id=<%=connection.getConnectionId%>&action=<%=action%>
+							<% } else { %>login <% } %>" method="<% if(session!=undefined){ %>post<% } else{ %>get<% } %>">
+			   				<button class="list-group-item list-group-item-action list-group-item-primary " name="response" value="yes">Yes</button>
+			   				<button class="list-group-item list-group-item-action list-group-item-danger" name="response" value="no"> No </button>
+			   				<button class="list-group-item list-group-item-action list-group-item-info" name="response" value="maybe">Maybe?</button>
+			   				<input type="hidden" name="viewConnection" value="<%= connection.getConnectionId %>">
+						</form>
+					</div>
+				</div>
+			<% } %>
+			</div>
+			<div class="row row-cols-2 broder-2">
+				<div class="col"><p class="lead h3"> Event Date </p></div>
+				<div class="col"><%- connection.getDateAndTime %></div>
+				<div class="col"><p class="lead h3"> Hosted By </p></div>
+				<div class="col"><%- connection.getHostedBy %></div>
+			</div>
+		</div>
+	</div>
 
-	<section id="connectiondetail">
-		<h3><%- connection.getConnection_name %></h3>
-			<p>
-				<img alt="" src="<%- connection.getImage %>" style="margin-left: 10px; margin-right: 10px; float: left; width: 127px; height: 180px;">
-			</p>
-			<p class="authorpara"><%- connection.getDetails %></p>
-			<p class="authorpara">
-				Event date: <span class="eventdate"> <%= connection.getDateAndTime %></span>
-			</p>
-			<p class="authorpara">
-				Hosted By: <span class="eventdate"> <%- connection.getHostedBy %></span>
-			</p>
-			 <h2>Are you going?</h2> &nbsp; &nbsp;
-			 <form class="" action="<% if(session!=undefined){ %>
-				 				savedConnections?id=<%=connection.getConnectionId%>&action=<%=action%>
-			 			<% } else { %>
-							login
-						<% } %>" method="<% if(session!=undefined){ %>post<% } else{ %>get<% } %>">
-					<button class="responsebutton" name="response" value="yes">Yes</button>
-					<button class="responsebutton" name="response" value="no"> No </button>
-					<button class="responsebutton" name="response" value="maybe">Maybe?</button>
-					<input type="hidden" name="viewConnection" value="<%= connection.getConnectionId %>">
-			 </form>
-
-	</section>
-	<footer>
 		<%- include('partials/footer.ejs')%>
-	</footer>
+		
 </body>
 </html>

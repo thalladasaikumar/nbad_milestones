@@ -2,45 +2,63 @@
 <html>
 <head>
 	<title>Connections Page</title>
-	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+	<%- include('partials/head.ejs')%>
 </head>
 <body>
-	<header>
-		<%- include('partials/header.ejs')%>
-	</header>
-	<header>
-		<%- include('partials/navigation.ejs')%>
-	</header>
+	<%- include('partials/header.ejs')%>
+	<%- include('partials/navigation.ejs')%>
+	
 	<% if(userProfileSession.getConnectionsList().length>0){ %>
-		<section id="connectionsSection">
-			<table>
-				<tr>
-					<th>Connections</th>
-					<th>Category</th>
-					<th>Going?</th>
-					<th></th>
-				</tr>
+		<div class="jumbotron bg-white">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm col-lg-5">
+						<p class="lead font-weight-bolder">Connection</p>
+					</div>
+					<div class="col-sm col-lg-3">
+						<p class="lead font-weight-bolder">Category</p>
+					</div>
+					<div class="col-sm col-lg-2">
+						<p class="lead font-weight-bolder">Your Response</p>
+					</div>
+					<div class="col-sm col-lg-2"></div>
+				</div>
 				<% userProfileSession.getConnectionsList().forEach(function(item){ %>
-					<tr>
-						<td><%- item.getConnection.getConnection_name %></td>
-						<td><%- item.getConnection.getConnection_category %></td>
-						<td><%- item.getRSVP %></td>
-						<td>
-							<form class="">
-								<button class="responsebutton" formmethod="post" formaction='connection?id=<%=item.getConnection.getConnectionId%>&action=update' >Update</button>
-								 &nbsp; &nbsp; &nbsp;
-								 <button class="responsebutton" formmethod="post" formaction='savedConnections?id=<%=item.getConnection.getConnectionId%>&action=delete' >Delete</button></td>
-							</form>
-					</tr>
+					<div class="row">
+						<div class="col-sm col-lg-5">
+							<p class="lead"><%- item.getConnection.getConnection_name %></p>
+						</div>
+						<div class="col-sm col-lg-3">
+							<p class="lead"><%- item.getConnection.getConnection_category %></p>
+						</div>
+						<div class="col-sm col-lg-2">
+							<p class="lead"><%= item.getRSVP %></p>
+						</div>
+						<div class="col-sm col-lg-2">
+							<div class="list-group list-group-horizontal-lg">
+								<form class="">
+									<button class="btn btn-primary" formmethod="post" formaction='connection?id=<%=item.getConnection.getConnectionId%>&action=update' >Update</button>
+									<button class="btn btn-danger" formmethod="post" formaction='savedConnections?id=<%=item.getConnection.getConnectionId%>&action=delete' >Delete</button>
+								</form>
+							</div>
+						</div>
+					</div>
 				<% }) %>
-			</table>
-		</section>
+			</div>
+		</div>
 	<% } else{ %>
-		<p>Please select few connections from connections tab</p>
+		<div class="jumbotron bg-white">
+			<div class="container">
+			  <h1 class="display-4">Good to see you back</h1>
+			  <p class="lead">You havn't responded to any connections yet</p>
+			  <hr class="my-4">
+			  <p class="lead">Select connections through connections tab</p>
+			  <a class="btn btn-info btn-lg" href="connections" role="button">View Connections</a>
+			</div>
+		  </div>
 	<% } %>
 
-	<footer>
-		<%- include('partials/footer.ejs')%>
-	</footer>
+	<%- include('partials/footer.ejs')%>
+	
 </body>
 </html>

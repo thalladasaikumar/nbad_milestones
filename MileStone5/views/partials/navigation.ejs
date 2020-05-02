@@ -1,8 +1,16 @@
-<nav id="subheadernav">
-  <% if(session!=undefined){ %>
-    <a href="connections"> Connections </a>
-    <a style="margin-left:763px">Welcome User <%- session.getFirstName %> </a>
-  <% } else { %>
-    <a href="connections"> Connections </a>
-  <% } %>
+<nav class="navbar navbar-expand-lg navbar-primary bg-light">
+  <div class="container">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="connections">Connections</a>
+      </li>
+    </ul>
+    <% if(session!=undefined){ %>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link disabled">Welcome User <%- session.getFirstName %></a>
+      </li>
+    </ul>
+    <% } %>
+  </div>
 </nav>

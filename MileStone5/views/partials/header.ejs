@@ -1,15 +1,37 @@
-<a href="/"><img class="logo" src="../../assets/images/logo.png" alt="Logo Image"></a>
-
-<% if(session==undefined){ %>
-  <nav>
-    <a href="newConnection"> Start a new connection </a>
-    <a href="login"> Login </a>
-    <a href="signup"> Sign Up! </a>
-  </nav>
-<% } else { %>
-  <nav>
-    <a href="newConnection"> Start a new connection </a>
-    <a href="savedConnections"> My Connections </a>
-    <a href="logout"> Sign Out </a>
-  </nav>
-<% } %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark h-50">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse container" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <% if(session==undefined){ %>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="newConnection">Start new Connection </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="signup">SignUp!</a>
+      </li>
+    </ul>
+    <% } else { %>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="newConnection">Start new Connection </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="savedConnections">My Connections</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout">Logout</a>
+        </li>
+      </ul>
+      <% } %>
+  </div>
+</nav>

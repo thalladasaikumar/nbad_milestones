@@ -2,36 +2,22 @@
 <html>
 <head>
 	<title>Book Depot</title>
-  <meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+	<%- include('partials/head.ejs')%>
 </head>
 <body>
-	<header>
-		<%- include('partials/header.ejs')%>
-	</header>
-	<header>
-		<%- include('partials/navigation.ejs')%>
-	</header>
+	<%- include('partials/header.ejs')%>
+	<%- include('partials/navigation.ejs')%>
 
-	<section id="slideshow">
-		<section id="content">
-			<h1>Welcome to Online Book Depot</h1>
-			<h3>Start learning.</h3>
-			<p>
-				Here you can find the books online and join book clubs and events.
-			</p>
-			<p>
-				Check out connections sections for next events and clubs.
-			</p>
+	<div class="jumbotron bg-white">
+		<div class="container">
+		  <h1 class="display-4">Welcome to Online Book Depot</h1>
+		  <p class="lead">Start learning.</p>
+		  <hr class="my-4">
+		  <p class="lead">Here you can find the books online and join book clubs and events.</p>
+		  <a class="btn btn-info btn-lg" href="connections" role="button">View Connections</a>
+		</div>
+	</div>
 
-			<button onclick="window.location.href = 'connections'"> Connections </button>
-
-		</section>
-	</section>
-
-
-	<footer>
-		<%- include('partials/footer.ejs') %>
-	</footer>
+	<%- include('partials/footer.ejs') %>
 </body>
 </html>
