@@ -51,12 +51,21 @@ const userPassword = new mongoose.Schema({
   password: String
 });
 
+const invite = new mongoose.Schema({
+  sender: String,
+  recevier: String,
+  connectionId: Number,
+  acknowledgement: Boolean
+});
+
 const userModel = mongoose.model('users', userSchema); //Model for User
 const connectionModel = mongoose.model('connections', connectionSchema); //Model for Connection
 const userProfileModel = mongoose.model('userprofiles', userProfileSchema); //Model for User Profile
 const userPasswordModel = mongoose.model('userpasswords', userPassword); //Model for Username and password
+const inviteModel = mongoose.model('invites', invite); //Model for invites
 
 module.exports.userModel = userModel;
 module.exports.connectionModel = connectionModel;
 module.exports.userProfileModel = userProfileModel;
 module.exports.userPasswordModel = userPasswordModel;
+module.exports.inviteModel = inviteModel;

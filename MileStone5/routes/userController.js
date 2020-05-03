@@ -46,8 +46,8 @@ function conObjList(activeUserProfile){
 
 const validation = [
   check('username').trim().not()
-    .isEmpty().withMessage('username is required').escape(),
-  check('password').trim().not().isEmpty().withMessage('password is required').escape()
+    .isEmpty().withMessage('Username is required').escape(),
+  check('password').trim().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).withMessage('Username and password mismatch')
 ];
 
 async function handleValidationErrors(req, res, next){

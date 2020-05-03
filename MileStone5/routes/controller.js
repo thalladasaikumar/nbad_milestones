@@ -91,10 +91,11 @@ router.get('/signup', sessionCheck, function (req, res) {
 })
 
 const validation = [
-  check('username', 'Username is required of min 5 letters').trim().not().isEmpty().isLength({min:5}).escape(),
+  check('username', 'Username is should be alphanumeric').trim().not().isEmpty().isAlphanumeric(),
   check('firstname', 'Firstname is required').trim().not().isEmpty().escape(),
   check('lastname', 'Lastname is required').trim().not().isEmpty().escape(),
   check('email', 'Email is required').isEmail().normalizeEmail(),
+  check('password').trim().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).withMessage('Password didn\'t meet the criteria').escape(),
   check('password', 'Password  and confirm password doesn\'t match').custom((password, {req}) => password === req.body.confirm_password).escape(),
   check('address1Field', 'Address-1 Field is required').trim().not().isEmpty().escape(),
   check('city', 'City is required').trim().not().isEmpty().escape(),
